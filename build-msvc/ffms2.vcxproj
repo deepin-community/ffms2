@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{AA137613-96A1-4388-8905-71345B4F8F87}</ProjectGuid>
+    <RootNamespace>ffms2</RootNamespace>
+  </PropertyGroup>
+  <!-- Config defaults -->
+  <!-- Has to be here and not in targets or the defaults don't get set in the UI -->
+  <PropertyGroup>
+    <BuiltWithGCC>false</BuiltWithGCC>
+    <OpencoreAmrNb>false</OpencoreAmrNb>
+    <OpencoreAmrWb>false</OpencoreAmrWb>
+    <WithPthread>false</WithPthread>
+    <WithAvResample>true</WithAvResample>
+    <ForkName>libav</ForkName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '11.0'">v110_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120_xp</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '14.0'">v140_xp</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="ffms2_include_dirs.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules />
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>FFMS_EXPORTS;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <DisableSpecificWarnings>4995;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\deps\$(Platform)-$(Configuration)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>FFMS_WIN_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <OmitFramePointers>true</OmitFramePointers>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <Link>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\avisynth\avisynth.cpp" />
+    <ClCompile Include="..\src\avisynth\avssources.cpp" />
+    <ClCompile Include="..\src\config\libs.cpp" />
+    <ClCompile Include="..\src\core\audiosource.cpp" />
+    <ClCompile Include="..\src\core\ffms.cpp" />
+    <ClCompile Include="..\src\core\filehandle.cpp" />
+    <ClCompile Include="..\src\core\indexing.cpp" />
+    <ClCompile Include="..\src\core\lavfaudio.cpp" />
+    <ClCompile Include="..\src\core\lavfindexer.cpp" />
+    <ClCompile Include="..\src\core\lavfvideo.cpp" />
+    <ClCompile Include="..\src\core\track.cpp" />
+    <ClCompile Include="..\src\core\utils.cpp" />
+    <ClCompile Include="..\src\core\videosource.cpp" />
+    <ClCompile Include="..\src\core\videoutils.cpp" />
+    <ClCompile Include="..\src\core\wave64writer.cpp" />
+    <ClCompile Include="..\src\core\zipfile.cpp" />
+    <ClCompile Include="..\src\vapoursynth\vapoursource.cpp" />
+    <ClCompile Include="..\src\vapoursynth\vapoursynth.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\ffms.h" />
+    <ClInclude Include="..\include\ffmscompat.h" />
+    <ClInclude Include="..\src\avisynth\avssources.h" />
+    <ClInclude Include="..\src\config\msvc-config.h" />
+    <ClInclude Include="..\src\core\audiosource.h" />
+    <ClInclude Include="..\src\core\filehandle.h" />
+    <ClInclude Include="..\src\core\indexing.h" />
+    <ClInclude Include="..\src\core\track.h" />
+    <ClInclude Include="..\src\core\utils.h" />
+    <ClInclude Include="..\src\core\videosource.h" />
+    <ClInclude Include="..\src\core\videoutils.h" />
+    <ClInclude Include="..\src\core\wave64writer.h" />
+    <ClInclude Include="..\src\core\zipfile.h" />
+    <ClInclude Include="..\src\vapoursynth\vapoursource.h" />
+    <ClInclude Include="..\src\vapoursynth\VapourSynth.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="config.targets" />
+  </ImportGroup>
+</Project>
