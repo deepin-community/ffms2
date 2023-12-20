@@ -1,3 +1,23 @@
+ffms2 (2.40+git20211209-2) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Set upstream metadata fields: Bug-Database, Bug-Submit.
+
+  [ Sebastian Ramacher ]
+  * Upload to unstable
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Mon, 07 Feb 2022 21:46:42 +0100
+
+ffms2 (2.40+git20211209-1) experimental; urgency=medium
+
+  * New upstream version 2.40+git20211209
+    - Fix build with ffmpeg 5.0 (Closes: #1004720)
+  * SONAME bump: libffms2-4 -> libffms2-5
+  * debian/control: Bump Standards-Version
+  * debian/copyright: Update for git snapshot
+
+ -- Sebastian Ramacher <sramacher@debian.org>  Wed, 02 Feb 2022 09:26:06 +0100
+
 ffms2 (2.23-5) unstable; urgency=medium
 
   [ Ondřej Nový ]
