@@ -1,3 +1,9 @@
+ffms2 (2.40+git20211209-2deepin0) unstable; urgency=medium
+
+  * No source change upload against GCC 12.
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Thu, 19 Sep 2024 22:47:13 +0800
+
 ffms2 (2.40+git20211209-2) unstable; urgency=medium
 
   [ Debian Janitor ]
